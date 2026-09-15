@@ -1,16 +1,30 @@
 "use client";
 
-import AgreementScreen from "@/components/AgreementScreen";
-import LandingScreen from "@/components/LandingScreen";
-import TermsModal from "@/components/TermsModal";
 import { useState } from "react";
 
+import LandingScreen from "@/components/LandingScreen";
+import AgreementScreen from "@/components/AgreementScreen";
+import TermsModal from "@/components/TermsModal";
+import EmailStep from "@/components/signup/EmailStep";
+import OTPStep from "@/components/signup/OTPStep";
 
-type Screen = "landing" | "agreement" | "email";
+type Screen =
+  | "landing"
+  | "agreement"
+  | "email"
+  | "otp";
 
 export default function Home() {
-  const [screen, setScreen] = useState<Screen>("landing");
-  const [termsOpen, setTermsOpen] = useState(false);
+  const [screen, setScreen] =
+    useState<Screen>("landing");
+
+  const [termsOpen, setTermsOpen] =
+    useState(false);
+
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [newsletter, setNewsletter] =
+    useState(false);
 
   if (screen === "landing") {
     return (
@@ -42,9 +56,37 @@ export default function Home() {
     );
   }
 
+  if (screen === "email") {
+    return (
+      <EmailStep
+        email={email}
+        newsletter={newsletter}
+        onEmailChange={setEmail}
+        onNewsletterChange={setNewsletter}
+        onProceed={() => {
+          setScreen("otp");
+        }}
+        onBack={() => {
+          setScreen("agreement");
+        }}
+      />
+    );
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black text-white">
-      <p>Email screen coming next...</p>
-    </main>
+    <OTPStep
+      email={email}
+      otp={otp}
+      onOtpChange={setOtp}
+      onVerify={() => {
+        console.log("OTP verified");
+      }}
+      onBack={() => {
+        setScreen("email");
+      }}
+      onResend={() => {
+        console.log("OTP resent");
+      }}
+    />
   );
 }
