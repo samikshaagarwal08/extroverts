@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface AgreementScreenProps {
     onAccept: () => void;
     onOpenTerms: () => void;
@@ -13,11 +15,15 @@ export default function AgreementScreen({
         <main className="min-h-screen bg-black text-white">
             <div className="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-8">
                 <div className="pt-20">
-                    <div
-                        aria-label="Extroverts"
-                        className="font-serif text-[76px] font-bold leading-none"
-                    >
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
                 </div>
 
@@ -33,7 +39,6 @@ export default function AgreementScreen({
                     </p>
                 </section>
 
-                {/* Bottom actions */}
                 <div className="mt-auto pb-16">
                     <p className="mb-7 text-[18px] text-white/55">
                         To proceed, accept{" "}

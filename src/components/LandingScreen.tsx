@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface LandingScreenProps {
     onContinue: () => void;
 }
@@ -20,11 +22,15 @@ export default function LandingScreen({
 
             <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-2xl flex-col">
                 <div className="flex justify-center pt-[clamp(8rem,25vh,15rem)]">
-                    <div
-                        aria-label="Extroverts"
-                        className="font-serif text-[82px] font-bold leading-none text-white"
-                    >
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
                 </div>
 

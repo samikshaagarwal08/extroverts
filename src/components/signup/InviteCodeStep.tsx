@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface InviteCodeStepProps {
     inviteCode: string;
     onInviteCodeChange: (value: string) => void;
@@ -15,10 +17,17 @@ export default function InviteCodeStep({
 }: InviteCodeStepProps) {
     return (
         <main className="min-h-screen bg-black px-8 text-white">
-            <div className="mx-auto flex min-h-screen max-w-4xl flex-col">
+            <div className="mx-auto flex min-h-screen max-w-xl flex-col">
                 <div className="flex items-center justify-between pt-10">
-                    <div className="font-serif text-6xl font-bold">
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
 
                     <span className="text-sm font-bold">
@@ -58,7 +67,7 @@ export default function InviteCodeStep({
                     <button
                         type="button"
                         onClick={onSignUp}
-                        className="h-16 w-full rounded-xl bg-white text-lg font-semibold text-black"
+                        className="h-12 w-full rounded-xl bg-white text-lg font-semibold text-black"
                     >
                         SIGN UP
                     </button>
@@ -66,7 +75,7 @@ export default function InviteCodeStep({
                     <button
                         type="button"
                         onClick={onBack}
-                        className="mt-5 h-16 w-full rounded-xl border border-white text-lg font-semibold"
+                        className="mt-5 h-12 w-full rounded-xl border border-white text-lg font-semibold"
                     >
                         BACK
                     </button>

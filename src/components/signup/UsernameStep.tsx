@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface UsernameStepProps {
@@ -36,10 +37,17 @@ export default function UsernameStep({
 
     return (
         <main className="min-h-screen bg-black px-8 text-white">
-            <div className="mx-auto flex min-h-screen max-w-4xl flex-col">
+            <div className="mx-auto flex min-h-screen max-w-xl flex-col">
                 <div className="flex items-center justify-between pt-10">
-                    <div className="text-6xl font-serif font-bold">
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
 
                     <span className="text-sm font-bold">
@@ -69,8 +77,8 @@ export default function UsernameStep({
                             }}
                             placeholder="USERNAME"
                             className={`h-16 w-full rounded-xl border bg-transparent px-5 text-lg outline-none ${error
-                                    ? "border-red-500"
-                                    : "border-white/30 focus:border-white"
+                                ? "border-red-500"
+                                : "border-white/30 focus:border-white"
                                 }`}
                         />
 
@@ -91,14 +99,14 @@ export default function UsernameStep({
                     <button
                         onClick={handleNext}
                         disabled={!username.trim()}
-                        className="h-16 w-full rounded-xl bg-white text-lg font-semibold text-black disabled:text-gray-400"
+                        className="h-12 w-full rounded-xl bg-white text-lg font-semibold text-black disabled:text-gray-400"
                     >
                         NEXT
                     </button>
 
                     <button
                         onClick={onBack}
-                        className="mt-5 h-16 w-full rounded-xl border border-white text-lg font-semibold"
+                        className="mt-5 h-12 w-full rounded-xl border border-white text-lg font-semibold"
                     >
                         BACK
                     </button>

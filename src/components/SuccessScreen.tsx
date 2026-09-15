@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 
 interface SuccessScreenProps {
@@ -20,8 +21,15 @@ export default function SuccessScreen({
     return (
         <main className="flex min-h-screen items-center justify-center bg-black px-8 text-white">
             <div className="text-center">
-                <div className="mx-auto font-serif text-7xl font-bold">
-                    E
+                <div>
+                    <Image
+                        src="/images/logo.png"
+                        alt="Extroverts"
+                        width={70}
+                        height={70}
+                        priority
+                        className="h-auto w-16"
+                    />
                 </div>
 
                 <h1 className="mt-10 text-3xl font-bold">

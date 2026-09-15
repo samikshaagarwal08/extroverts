@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface EmailStepProps {
@@ -65,14 +66,17 @@ export default function EmailStep({
 
     return (
         <main className="min-h-screen bg-black text-white">
-            <div className="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-16">
-                {/* Logo */}
+            <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-16">
                 <div className="pt-20">
-                    <div
-                        aria-label="Extroverts"
-                        className="font-serif text-[76px] font-bold leading-none"
-                    >
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
                 </div>
 

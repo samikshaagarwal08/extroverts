@@ -108,7 +108,7 @@ export default function Home() {
         username={username}
         onUsernameChange={setUsername}
         onNext={() => setScreen("age")}
-        onBack={() => console.log("Back")}
+        onBack={() => setScreen("email")}
       />
     );
   }

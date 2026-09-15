@@ -2,12 +2,28 @@
 
 import { useState } from "react";
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import Image from "next/image";
+
 interface PronounsStepProps {
     pronouns: string;
     onPronounsChange: (value: string) => void;
     onNext: () => void;
     onBack: () => void;
 }
+
+const pronounOptions = [
+    "He/Him",
+    "She/Her",
+    "They/Them",
+    "Prefer not to say",
+];
 
 export default function PronounsStep({
     pronouns,
@@ -18,8 +34,8 @@ export default function PronounsStep({
     const [error, setError] = useState("");
 
     const handleNext = () => {
-        if (!pronouns.trim()) {
-            setError("Please enter your pronouns");
+        if (!pronouns) {
+            setError("Please select your pronouns");
             return;
         }
 
@@ -29,11 +45,17 @@ export default function PronounsStep({
 
     return (
         <main className="min-h-screen bg-black px-8 text-white">
-            <div className="mx-auto flex min-h-screen max-w-4xl flex-col">
-                {/* Header */}
+            <div className="mx-auto flex min-h-screen max-w-xl flex-col">
                 <div className="flex items-center justify-between pt-10">
-                    <div className="font-serif text-6xl font-bold">
-                        E
+                    <div>
+                        <Image
+                            src="/images/logo.png"
+                            alt="Extroverts"
+                            width={70}
+                            height={70}
+                            priority
+                            className="h-auto w-16"
+                        />
                     </div>
 
                     <span className="text-sm font-bold">
@@ -51,27 +73,31 @@ export default function PronounsStep({
                             PRONOUNS
                         </label>
 
-                        <input
-                            type="text"
+                        <Select
                             value={pronouns}
-                            onChange={(e) => {
-                                onPronounsChange(e.target.value);
+                            onValueChange={(value: any) => {
+                                onPronounsChange(value);
+                                setError("");
+                            }}
+                        >
+                            <SelectTrigger
+                                className={`h-16! w-full rounded-xl border bg-transparent px-5 text-lg text-white shadow-none focus:ring-0 focus:ring-offset-0 ${error ? "border-red-500" : "border-white/30"} `}
+                            >
+                                <SelectValue placeholder="SELECT PRONOUNS" />
+                            </SelectTrigger>
 
-                                if (error) {
-                                    setError("");
-                                }
-                            }}
-                            onBlur={() => {
-                                if (!pronouns.trim()) {
-                                    setError("Please enter your pronouns");
-                                }
-                            }}
-                            placeholder="PRONOUNS"
-                            className={`h-16 w-full rounded-xl border bg-transparent px-5 text-lg outline-none ${error
-                                ? "border-red-500"
-                                : "border-white/30 focus:border-white"
-                                }`}
-                        />
+                            <SelectContent className="border-white/20 bg-[#171717] text-white">
+                                {pronounOptions.map((option) => (
+                                    <SelectItem
+                                        key={option}
+                                        value={option}
+                                        className="cursor-pointer text-base focus:bg-white focus:text-black"
+                                    >
+                                        {option}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
                         {error && (
                             <p className="mt-2 text-sm text-red-500">
@@ -90,8 +116,8 @@ export default function PronounsStep({
                     <button
                         type="button"
                         onClick={handleNext}
-                        disabled={!pronouns.trim()}
-                        className="h-16 w-full rounded-xl bg-white text-lg font-semibold text-black disabled:text-gray-400"
+                        disabled={!pronouns}
+                        className="h-12 w-full rounded-xl bg-white text-lg font-semibold text-black disabled:text-gray-400"
                     >
                         NEXT
                     </button>
@@ -99,7 +125,7 @@ export default function PronounsStep({
                     <button
                         type="button"
                         onClick={onBack}
-                        className="mt-5 h-16 w-full rounded-xl border border-white text-lg font-semibold"
+                        className="mt-5 h-12 w-full rounded-xl border border-white text-lg font-semibold"
                     >
                         BACK
                     </button>
