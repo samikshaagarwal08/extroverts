@@ -7,12 +7,16 @@ import AgreementScreen from "@/components/AgreementScreen";
 import TermsModal from "@/components/TermsModal";
 import EmailStep from "@/components/signup/EmailStep";
 import OTPStep from "@/components/signup/OTPStep";
+import UsernameStep from "@/components/signup/UsernameStep";
+import AgeStep from "@/components/signup/AgeStep";
 
 type Screen =
   | "landing"
   | "agreement"
   | "email"
-  | "otp";
+  | "otp"
+  | "username" 
+  | "age";
 
 export default function Home() {
   const [screen, setScreen] =
@@ -23,6 +27,8 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+  const [username, setUsername] = useState("");
+  const [age, setAge] = useState("");
   const [newsletter, setNewsletter] =
     useState(false);
 
@@ -73,13 +79,14 @@ export default function Home() {
     );
   }
 
-  return (
-    <OTPStep
+  if (screen === "otp") {
+    return (
+      <OTPStep
       email={email}
       otp={otp}
       onOtpChange={setOtp}
       onVerify={() => {
-        console.log("OTP verified");
+        setScreen("username");
       }}
       onBack={() => {
         setScreen("email");
@@ -87,6 +94,29 @@ export default function Home() {
       onResend={() => {
         console.log("OTP resent");
       }}
+    />
+    );
+  }
+
+
+  if (screen === "username") {
+    return (
+      <UsernameStep
+        username={username}
+        onUsernameChange={setUsername}
+        onNext={() => setScreen("age")}
+        onBack={() => console.log("Back")}
+      />
+    );
+  }
+
+
+  return (
+    <AgeStep
+      age={age}
+      onAgeChange={setAge}
+      onNext={() => console.log("Age completed")}
+      onBack={() => setScreen("username")}
     />
   );
 }
